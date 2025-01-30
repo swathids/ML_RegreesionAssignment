@@ -43,28 +43,30 @@ Predictions are rarely exact, but small differences (e.g., predicting $200,050 i
 Instead of accuracy, regression models use error-based metrics like:
 MSE, RMSE, and MAE to measure prediction error.
 R² Score to evaluate how well the model explains the variance in data.
+
+
 Inferences from Model Performance
-Linear Regression
 
-Initially showed poor performance.
-Scaling y improved results.
-R² score indicates how well the model fits the data.
-Support Vector Regression (SVR)
+Inference for Linear Regression Performance
 
-Performed better after feature scaling.
-Works well for non-linear relationships.
-Random Forest Regressor
+Metric	Value
+Mean Squared Error (MSE)	0.5389
+Root Mean Squared Error (RMSE)	0.7341
+Mean Absolute Error (MAE)	0.5353
+R² Score	0.5888
 
-Performed better than Linear Regression due to its ability to handle non-linearity.
-Feature importance analysis shows which factors contribute most to predictions.
-Decision Tree Regressor
 
-Strong performance on training data but prone to overfitting on test data.
-Overfitting is identified by a large difference in train and test R² scores.
-Gradient Boosting Regressor
+ Here with R² = 0.5888, the model explains ~59% of the variance in house prices, but 41% remains unexplained.
+This indicates missing features or non-linearity in the relationship between predictors and house prices.
+Prediction Errors Are High
 
-Helps reduce overfitting and improves performance.
-Generally provides better results than Decision Trees alone.
-Conclusion
-This assignment demonstrates how different regression models handle housing price predictions. Tree-based models (Random Forest, Gradient Boosting) generally outperform Linear Regression due to their ability to model complex relationships. Feature scaling significantly improves the performance of SVR, and residual analysis helps assess model accuracy. The choice of the best model depends on the trade-off between interpretability and predictive power.
+RMSE (0.7341) means the typical prediction error is around $73,000 (if house values are scaled in 100,000s).
+MAE (0.5353) suggests the average absolute error is ~$53,000 per house, meaning many predictions are significantly off.
+Linear Assumptions Are Limiting the Model
 
+Housing prices are influenced by complex, non-linear interactions (e.g., neighborhood trends, income levels, and house age effects).
+A simple linear relationship struggles to capture these dependencies, leading to suboptimal accuracy.
+Conclusion & Next Steps
+🔹 Linear Regression is not the best choice for this dataset.
+🔹 Tree-based models like Gradient Boosting or XGBoost will likely perform better due to their ability to model non-linearity.
+🔹 Feature engineering (polynomial terms, interaction features) may help improve Linear Regression, but it will still be outperformed by ensemble methods.
