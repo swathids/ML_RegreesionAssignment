@@ -66,7 +66,7 @@ Linear Assumptions Are Limiting the Model
 
 Housing prices are influenced by complex, non-linear interactions (e.g., neighborhood trends, income levels, and house age effects).
 A simple linear relationship struggles to capture these dependencies, leading to suboptimal accuracy.
-Conclusion & Next Steps
-🔹 Linear Regression is not the best choice for this dataset.
-🔹 Tree-based models like Gradient Boosting or XGBoost will likely perform better due to their ability to model non-linearity.
-🔹 Feature engineering (polynomial terms, interaction features) may help improve Linear Regression, but it will still be outperformed by ensemble methods.
+Conclusion 
+ --Linear Regression is not the best choice for this dataset.
+--Tree-based models like Gradient Boosting or XGBoost will likely perform better due to their ability to model non-linearity.
+--Feature engineering (polynomial terms, interaction features) may help improve Linear Regression, but it will still be outperformed by ensemble methods.
