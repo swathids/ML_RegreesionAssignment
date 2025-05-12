@@ -1,72 +1,26 @@
-# ML_RegreesionAssignment
+## Preprocessing Steps and Justification
+The dataset used in this analysis is the California Housing dataset, which includes various numerical features related to housing and a continuous target variable representing median house value. During preprocessing, the dataset was first loaded into a DataFrame, and basic exploratory steps such as df.info() and checking for missing values (df.isnull().sum()) were performed. This step ensures the dataset is clean and free of null entries, which is essential before feeding it into machine learning models. No missing values were detected, so no imputation was necessary. All features were already in numeric format, which is suitable for regression models. Additionally, feature-target separation (X, y) and splitting into training and testing sets help avoid overfitting and enable fair evaluation of the models. These preprocessing steps ensure data consistency, model readiness, and reliable evaluation.
 
-Introduction
-This assignment explores different Machine Learning regression models using the California housing dataset from Kaggle. The objective is to predict housing prices based on multiple features such as median income, house age, and population. The dataset undergoes preprocessing, feature scaling, and model evaluation using various performance metrics.
+## Regression Algorithm Implementation
+1. Linear Regression:
+Linear Regression models the relationship between independent variables and the target variable using a straight line. It assumes linearity, homoscedasticity, and no multicollinearity. It is suitable for this dataset because it provides a strong baseline and the features are already numeric and continuous, matching its assumptions.
 
-Preprocessing Steps
-Loading the Dataset
+2. Decision Tree Regressor:
+This model splits the dataset into branches based on feature thresholds, forming a tree structure. It captures non-linear relationships and interactions between variables. It is well-suited for this dataset due to its ability to handle complex patterns without requiring feature scaling.
 
-The California Housing Dataset is fetched using fetch_california_housing() from sklearn.datasets.
-It is converted into a pandas DataFrame with appropriate feature names.
-The target variable (median house price) is added to the DataFrame.
-Checking for Missing Values
+3. Random Forest Regressor:
+An ensemble of decision trees, Random Forest reduces overfitting and improves generalization by averaging predictions from multiple trees. It is highly suitable for this dataset as it can manage both linear and non-linear trends and is less sensitive to noise.
 
-Used .isnull().sum() to verify missing values.
-No missing values were found in this dataset.
-Splitting Features and Target
+4. Gradient Boosting Regressor:
+This model builds trees sequentially, where each tree corrects the errors of the previous one. It is effective in reducing bias and variance. For this dataset, it is suitable because it often provides better accuracy on tabular datasets due to its strong optimization nature.
 
-The dataset is split into features (X) and target (y).
-Data is divided into training (80%) and testing (20%) sets using train_test_split().
-Feature Scaling
+5. Support Vector Regressor (SVR):
+SVR attempts to find a hyperplane that best fits the data within a certain margin. It works well for smaller datasets and can model non-linear relationships using kernels. It is appropriate for this dataset when properly tuned, although it is computationally more intensive.
 
-StandardScaler is used to standardize feature values to mean = 0 and standard deviation = 1.
-This prevents features with larger scales from dominating the learning process.
-Scaling the Target Variable (y) for SVR
+## Model Evaluation and Comparison
+Each regression model was evaluated using Mean Squared Error (MSE), Mean Absolute Error (MAE), and R-squared Score (R²). These metrics respectively quantify prediction error, average magnitude of error, and goodness-of-fit.
 
-Since Support Vector Regression (SVR) is sensitive to scaling, y is also scaled using StandardScaler.
-This ensures better numerical stability and improved performance of SVR.
-Regression Models Implemented
-The following regression models are applied:
+Best-Performing Algorithm: Random Forest Regressor consistently achieved the lowest MSE and MAE, and the highest R² score. Its ensemble nature and robustness to overfitting likely contributed to its superior performance on this structured dataset.
 
-Linear Regression
-Support Vector Regression (SVR)
-Random Forest Regressor
-Decision Tree Regressor
-Gradient Boosting Regressor
-Each model is evaluated using Mean Squared Error (MSE), Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), and R² score. Residual analysis and feature importance plots are also used to gain insights into model behavior.
+Worst-Performing Algorithm: SVR performed the worst, possibly due to its sensitivity to feature scales and its complexity in high-dimensional datasets like this one. Without careful tuning and scaling, SVR often underperforms compared to tree-based models.
 
-Why Accuracy Scoring Is Not Used in Regression?
-Unlike classification tasks, accuracy is not applicable in regression due to the following reasons:
-
-Regression predicts continuous values rather than discrete categories, making it impossible to classify predictions as simply "correct" or "incorrect."
-Predictions are rarely exact, but small differences (e.g., predicting $200,050 instead of $200,000) can still be useful.
-Instead of accuracy, regression models use error-based metrics like:
-MSE, RMSE, and MAE to measure prediction error.
-R² Score to evaluate how well the model explains the variance in data.
-
-
-Inferences from Model Performance
-
-Inference for Linear Regression Performance
-
-Metric	Value
-Mean Squared Error (MSE)	0.5389
-Root Mean Squared Error (RMSE)	0.7341
-Mean Absolute Error (MAE)	0.5353
-R² Score	0.5888
-
-
- Here with R² = 0.5888, the model explains ~59% of the variance in house prices, but 41% remains unexplained.
-This indicates missing features or non-linearity in the relationship between predictors and house prices.
-Prediction Errors Are High
-
-RMSE (0.7341) means the typical prediction error is around $73,000 (if house values are scaled in 100,000s).
-MAE (0.5353) suggests the average absolute error is ~$53,000 per house, meaning many predictions are significantly off.
-Linear Assumptions Are Limiting the Model
-
-Housing prices are influenced by complex, non-linear interactions (e.g., neighborhood trends, income levels, and house age effects).
-A simple linear relationship struggles to capture these dependencies, leading to suboptimal accuracy.
-Conclusion 
- --Linear Regression is not the best choice for this dataset.
---Tree-based models like Gradient Boosting or XGBoost will likely perform better due to their ability to model non-linearity.
---Feature engineering (polynomial terms, interaction features) may help improve Linear Regression, but it will still be outperformed by ensemble methods.
